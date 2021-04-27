@@ -8,6 +8,8 @@ class DisplayWinner extends React.Component {
   }
 
   displayWinner() {
+    // console.log(this.props);
+
     if (
       this.props.player1Tokens.indexOf(false) === -1 ||
       this.props.player2Tokens.indexOf(false) === -1
@@ -17,10 +19,10 @@ class DisplayWinner extends React.Component {
           <p className='pWins'>
             {' '}
             {this.props.player1Tokens.indexOf(false) === -1 && (
-              <span className='spanP1'>Player 1</span>
+              <span className='spanP1'>Player 1 </span>
             )}
             {this.props.player2Tokens.indexOf(false) === -1 && (
-              <span className='spanP1'>Player 2</span>
+              <span className='spanP1'>Player 2 </span>
             )}
             Wins !
           </p>

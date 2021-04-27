@@ -20,7 +20,7 @@ class App extends React.Component {
     };
 
     this.lancerDee = this.lancerDee.bind(this);
-    // this.renderVictory = this.renderVictory.bind(this);
+    this.renderVictory = this.renderVictory.bind(this);
   }
 
   lancerDee() {
@@ -106,7 +106,11 @@ class App extends React.Component {
     ) {
       return (
         <>
-          <DisplayWinner />
+          <DisplayWinner
+            player1Tokens={this.state.player1Tokens}
+            player2Tokens={this.state.player2Tokens}
+            renderCircles={this.renderCircles}
+          />
         </>
       );
     } else {
@@ -261,16 +265,7 @@ class App extends React.Component {
   //   );
 
   render() {
-    return (
-      <div>
-        <DisplayWinner
-          player1Tokens={this.state.player1Tokens}
-          player2Tokens={this.state.player2Tokens}
-          renderCircles={this.renderCircles}
-        />
-        {this.renderVictory()}
-      </div>
-    );
+    return <div>{this.renderVictory()}</div>;
   }
 }
 
