@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import Circle from './components/Circle.jsx';
-import Winner from './assets/pic/winner.gif';
+import Circle from './components/circle/Circle.jsx';
+import DisplayWinner from './components/displayWinner/DisplayWinner.jsx';
+// import Winner from './assets/pic/winner.gif';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -19,7 +20,7 @@ class App extends React.Component {
     };
 
     this.lancerDee = this.lancerDee.bind(this);
-    this.renderVictory = this.renderVictory.bind(this);
+    // this.renderVictory = this.renderVictory.bind(this);
   }
 
   lancerDee() {
@@ -58,6 +59,9 @@ class App extends React.Component {
   }
 
   renderCircles(n, p) {
+    // console.log("i'm in renderCircles");
+    console.log(`param n: ${n} param p: ${p}`);
+
     let circlesArray = [];
 
     for (let index = n; index <= p; index++) {
@@ -96,39 +100,14 @@ class App extends React.Component {
   }
 
   renderVictory() {
-    if (this.state.player1Tokens.indexOf(false) === -1) {
+    if (
+      this.state.player1Tokens.indexOf(false) === -1 ||
+      this.state.player2Tokens.indexOf(false) === -1
+    ) {
       return (
-        <div className='winner'>
-          <p className='pWins'>
-            {' '}
-            <span className='spanP1'>Player 1</span> Wins !
-          </p>
-          <div
-            className='offset-3'
-            style={{
-              background: `url(${Winner})`,
-              height: `${500}px`,
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        </div>
-      );
-    } else if (this.state.player2Tokens.indexOf(false) === -1) {
-      return (
-        <div className='winner'>
-          <p className='pWins'>
-            {' '}
-            <span className='spanP2'>Player 2</span> Wins !
-          </p>
-          <div
-            className='offset-3'
-            style={{
-              background: `url(${Winner})`,
-              height: `${500}px`,
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        </div>
+        <>
+          <DisplayWinner />
+        </>
       );
     } else {
       return (
@@ -246,8 +225,52 @@ class App extends React.Component {
     }
   }
 
+  // if (this.state.player1Tokens.indexOf(false) === -1) {
+  //   return (
+  //     <div className='winner'>
+  //       <p className='pWins'>
+  //         {' '}
+  //         <span className='spanP1'>Player 1</span> Wins !
+  //       </p>
+  //       <div
+  //         className='offset-3'
+  //         style={{
+  //           background: `url(${Winner})`,
+  //           height: `${500}px`,
+  //           backgroundRepeat: 'no-repeat',
+  //         }}
+  //       />
+  //     </div>
+  //   );
+  // } else if (this.state.player2Tokens.indexOf(false) === -1) {
+  //   return (
+  //     <div className='winner'>
+  //       <p className='pWins'>
+  //         {' '}
+  //         <span className='spanP2'>Player 2</span> Wins !
+  //       </p>
+  //       <div
+  //         className='offset-3'
+  //         style={{
+  //           background: `url(${Winner})`,
+  //           height: `${500}px`,
+  //           backgroundRepeat: 'no-repeat',
+  //         }}
+  //       />
+  //     </div>
+  //   );
+
   render() {
-    return <div>{this.renderVictory()}</div>;
+    return (
+      <div>
+        <DisplayWinner
+          player1Tokens={this.state.player1Tokens}
+          player2Tokens={this.state.player2Tokens}
+          renderCircles={this.renderCircles}
+        />
+        {this.renderVictory()}
+      </div>
+    );
   }
 }
 
